@@ -14,7 +14,7 @@ namespace ArkUpdater
 {
     class Program
     {
-        private static StringBuilder sb = new StringBuilder();
+        private static readonly StringBuilder Sb = new StringBuilder();
 
         static void Main(string[] args)
         {
@@ -38,14 +38,13 @@ namespace ArkUpdater
                 return;
             }
             if (!Rcon.Instance.Connect(Settings.Instance.ServerHost, Settings.Instance.RconPort, Settings.Instance.RconPassword))
-            //if (!Rcon.Instance.Connect(Settings.Instance.ServerHost, Settings.Instance.RconPort, Settings.Instance.RconPassword))
             {
                 Log.LogErrorToConsole("Could not connect to the server using RCON");
                 Log.LogErrorToConsole("Press any key to exit");
                 Console.ReadKey();
                 return;
             }
-            //Rcon.Instance.Disconnect();
+            
             Rcon.Instance.Disconnect();
 
             // Start updater
@@ -96,7 +95,7 @@ namespace ArkUpdater
 
         private static void Process_OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
-            sb.AppendLine(e.Data);
+            Sb.AppendLine(e.Data);
         }
     }
 }
